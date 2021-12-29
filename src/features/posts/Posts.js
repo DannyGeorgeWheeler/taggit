@@ -15,7 +15,7 @@ export default function Posts() {
 
     const getTitleTags = () => {
         if (currentTags.length === 0) {
-            return <em>everything.</em>;
+            return <em>none</em>;
         } else {
             return currentTags.map(tag => {
                 return <span className='tag' key={tag.id}>{tag.name}</span>;

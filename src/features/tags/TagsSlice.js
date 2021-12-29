@@ -5,14 +5,14 @@ const testTags = {
         id: 'id1',
         name: 'humour',
         communityIds: ['giantbombId', 'programmingHumourId'],
-        active: true
+        active: false
     },
 
     id2: {
         id: 'id2',
         name: 'learning',
         communityIds: ['babiesId'],
-        active: true
+        active: false
     },
 
     id3: {
@@ -50,7 +50,7 @@ export const tagsSlice = createSlice({
         },
 
         toggleActive: (state, action) => {
-            const { tagId } = action.payload;
+            const tagId = action.payload;
             state.tags[tagId].active = !state.tags[tagId].active;
         },
     }
