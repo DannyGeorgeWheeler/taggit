@@ -5,7 +5,7 @@ const testTags = {
         id: 'id1',
         name: 'humour',
         communityIds: ['giantbombId', 'programmingHumourId'],
-        active: false
+        active: true
     },
 
     id2: {
@@ -29,7 +29,7 @@ export const tagsSlice = createSlice({
         tags: testTags,
     },
     reducers: {
-        addTag: (state, action) => {
+        createTag: (state, action) => {
             const { id, name } = action.payload;
             state.tags[id] = {
                 id: id,
@@ -37,6 +37,11 @@ export const tagsSlice = createSlice({
                 communityIds: [],
                 active: false,
             }
+        },
+
+        removeTag: (state, action) => {
+            const { id } = action.payload;
+            delete state.tags[id];
         },
 
         addCommunityTag: (state, action) => {
@@ -58,7 +63,8 @@ export const tagsSlice = createSlice({
 
 
 export const { 
-    addTag, 
+    createTag,
+    deleteTag, 
     addTagId, 
     addCommunityTag, 
     removeCommunityTag, 

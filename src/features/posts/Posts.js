@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectPosts } from "./PostsSlice";
 import { Link } from 'react-router-dom';
 import { selectActiveTags, selectTags } from "../tags/TagsSlice";
+import Tag from '../tags/Tag';
 
 export default function Posts() {
     const posts = useSelector(selectPosts);
@@ -50,7 +51,7 @@ export default function Posts() {
                                 <div className="tags">
                                     {Object.values(tags)
                                     .filter(tag => tag.communityIds.includes(post.community))
-                                    .map(tag => <span className='tag' key={tag.id}>{tag.name}</span>)}
+                                    .map(tag => <Tag key={tag.id} tagId={tag.id} />)}
                                 </div>
                             </div>
                         </div>

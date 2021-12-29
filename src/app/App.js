@@ -6,6 +6,7 @@ import { faReddit } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Posts from '../features/posts/Posts';
 import Tags from '../features/tags/Tags';
+import Communities from '../features/communities/Communities';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <Routes>
           <Route path='/' element={<Posts />} />
           <Route path='/tags' element={<Tags />} />
-          <Route path='/communities' element={<h1>Communities</h1>} />
+          <Route path='/communities' element={<Communities />} />
           <Route path='/post' element={<h1>Post</h1>} />
       </Routes>
       <Outlet />

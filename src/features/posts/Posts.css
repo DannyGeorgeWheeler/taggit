@@ -26,6 +26,8 @@ h2 {
 .postMeta {
     color: hsl(180, 2%, 55%);
     display: flex;
+    margin: 0;
+    text-align: left;
 }
 
 .postedBy {
