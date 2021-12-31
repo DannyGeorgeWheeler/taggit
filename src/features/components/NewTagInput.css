@@ -1,0 +1,17 @@
+.newTagInput {
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    padding: 4px;
+    transition: all 0.7s ease;
+    width: 5rem;
+    margin-right: 8px;
+}
+
+.hide {
+    opacity: 0;
+    width: 0px;
+    visibility: hidden;
+    padding: 4px 0px;
+    margin-right: 0px;
+}

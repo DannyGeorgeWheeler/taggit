@@ -2,3 +2,11 @@
     margin: 1rem auto;
     text-align: center;
 }
+
+.communityTags {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    justify-content: center;
+}
+

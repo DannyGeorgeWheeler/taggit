@@ -1,13 +1,19 @@
 import './Tags.css';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectTags } from './TagsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeCommunityTag, selectTags } from './TagsSlice';
 
-export default function Tag({tagId, deleteButton = false}) {
+export default function Tag({tagId, communityId = undefined}) {
+    const dispatch = useDispatch();
     const tags = useSelector(selectTags);
 
+    const handleClick = (event) => {
+        //console.log(`tagId: ${tagId} communityId: ${communityId}`)
+        dispatch(removeCommunityTag({tagId, communityId}))
+    }
+
     const renderDeleteButton = () => {
-        return deleteButton ? <button className='deleteButton'>X</button> : '';
+        return communityId !== undefined ? <button className='deleteButton' onClick={handleClick}>X</button> : '';
     }
 
     return (

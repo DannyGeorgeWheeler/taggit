@@ -52,4 +52,34 @@ article {
 h1, h2 {
   text-align: center;
   font-family: 'Noto Serif JP', serif;
+  flex-grow: 1;
+  font-size: 1.8rem;
+}
+
+h3 {
+  margin-bottom: 0.8rem;
+}
+
+button {
+  background-color: hsl(50, 100%, 50%);
+  border: none;
+  border-radius: 20px;
+  padding: 0.3rem 0.5rem;
+  transition: all .3s ease;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+button:hover {
+  background-color: hsl(180, 5%, 91%);
+  color: #222;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 }

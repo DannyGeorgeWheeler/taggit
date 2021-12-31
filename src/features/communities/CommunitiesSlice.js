@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const testCommunities = {
     id1: {
-        id: 'id1',
+        id: 'giantbombId',
         name: 'giantbomb'
     },
 
     id2: {
-        id: 'id2',
+        id: 'babiesId',
         name: 'babies'
     }
 }

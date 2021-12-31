@@ -30,11 +30,11 @@ export const tagsSlice = createSlice({
     },
     reducers: {
         createTag: (state, action) => {
-            const { id, name } = action.payload;
+            const { id, name, communityIds = [] } = action.payload;
             state.tags[id] = {
                 id: id,
                 name: name,
-                communityIds: [],
+                communityIds: communityIds,
                 active: false,
             }
         },
@@ -51,7 +51,8 @@ export const tagsSlice = createSlice({
 
         removeCommunityTag: (state, action) => {
             const {tagId, communityId } = action.payload;
-            state.tags[tagId].communityIds.filter(id => id !== communityId);
+            const index = state.tags[tagId].communityIds.indexOf(communityId)
+            state.tags[tagId].communityIds.splice(index, 1);
         },
 
         toggleActive: (state, action) => {

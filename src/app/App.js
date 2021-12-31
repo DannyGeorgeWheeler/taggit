@@ -5,7 +5,7 @@ import { faTag } from '@fortawesome/free-solid-svg-icons';
 import { faReddit } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Posts from '../features/posts/Posts';
-import Tags from '../features/tags/Tags';
+import TagsFilter from '../features/tags/TagsFilter';
 import Communities from '../features/communities/Communities';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       </nav>
       <Routes>
           <Route path='/' element={<Posts />} />
-          <Route path='/tags' element={<Tags />} />
+          <Route path='/tags' element={<TagsFilter />} />
           <Route path='/communities' element={<Communities />} />
           <Route path='/post' element={<h1>Post</h1>} />
       </Routes>

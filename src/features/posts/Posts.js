@@ -38,7 +38,7 @@ export default function Posts() {
 
     return (
         <section>
-            <h1>Active Tags: {getTitleTags()}</h1>
+            <h1 className='activeTagsHeader'>Active Tags: {getTitleTags()}</h1>
             {filterPosts().map(post => {
                 return (
                 <article key={post.id}>
@@ -48,7 +48,7 @@ export default function Posts() {
                             <p className='postContent'>{post.content}</p>
                             <div className="postMeta">
                                 <span className='postedBy'>Posted by {post.author} in {post.community}</span>
-                                <div className="tags">
+                                <div className="postTags">
                                     {Object.values(tags)
                                     .filter(tag => tag.communityIds.includes(post.community))
                                     .map(tag => <Tag key={tag.id} tagId={tag.id} />)}
