@@ -5,11 +5,13 @@ import { selectPosts } from "./PostsSlice";
 import { Link } from 'react-router-dom';
 import { selectActiveTags, selectTags } from "../tags/TagsSlice";
 import Tag from '../tags/Tag';
+import { selectCommunities } from '../communities/CommunitiesSlice';
 
 export default function Posts() {
     const posts = useSelector(selectPosts);
     const tags = useSelector(selectTags);
     const currentTags = useSelector(selectActiveTags);
+    const communities = useSelector(selectCommunities);
 
     // console.log('tags:' + tags['id1'].name);
     // console.log(currentTags[0]);
@@ -41,13 +43,13 @@ export default function Posts() {
             <h1 className='activeTagsHeader'>Active Tags: {getTitleTags()}</h1>
             {filterPosts().map(post => {
                 return (
-                <article key={post.id}>
-                    <Link key={post.id} to={post.id}>
+                <article key={post.id} className='postSummary'>
+                    <Link key={post.id} to={`/post/${post.id}`} >
                         <div className='postCard'>
-                            <h2 className='postTitle'>{post.title}</h2>
-                            <p className='postContent'>{post.content}</p>
-                            <div className="postMeta">
-                                <span className='postedBy'>Posted by {post.author} in {post.community}</span>
+                            <h2 className='summaryTitle'>{post.title}</h2>
+                            <p className='summaryContent'>{post.content}</p>
+                            <div className="summaryMeta">
+                                <span className='summaryPostedBy'>Posted by {post.author} in <span className='metaHighlight'>{communities[post.community].name}</span></span>
                                 <div className="postTags">
                                     {Object.values(tags)
                                     .filter(tag => tag.communityIds.includes(post.community))

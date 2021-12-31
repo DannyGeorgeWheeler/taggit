@@ -13,16 +13,16 @@ export const postsSlice = createSlice({
 })
 
 const posts = {
-    0: {
-        id: 0,
+    id1: {
+        id: 'id1',
         author: 'Danny',
         community: 'giantbombId',
         title: 'Giant Bomb is doing weird stuff...',
         content: 'This is a block of text about how giant bomb has changed man, and is doing really weird stuff lately.'    
     },
 
-    1: {
-        id: 1,
+    id2: {
+        id: 'id2',
         author: 'Tulu',
         community: 'babiesId',
         title: 'I\'m feeling so full',

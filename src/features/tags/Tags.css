@@ -5,9 +5,9 @@ p {
 
 .tag {
     padding: 3px 7px;
-    background-color: hsl(163, 31%, 53%);
+    background-color: hsl(163, 61%, 53%);
     border-radius: 10px;
-    color: hsl(180, 5%, 91%);
+    color: hsl(184, 17%, 10%);
     font-size: 1.2rem;
     text-transform: uppercase;
     align-items: center;
@@ -40,7 +40,7 @@ p {
 }
 
 .tagListItem:hover .tag{
-    background-color: hsl(163, 31%, 43%);
+    background-color: gold;
     transition: all 0.4s ease;
 }
 

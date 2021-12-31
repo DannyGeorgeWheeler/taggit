@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Posts from '../features/posts/Posts';
 import TagsFilter from '../features/tags/TagsFilter';
 import Communities from '../features/communities/Communities';
+import Post from '../features/posts/Post';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path='/' element={<Posts />} />
           <Route path='/tags' element={<TagsFilter />} />
           <Route path='/communities' element={<Communities />} />
-          <Route path='/post' element={<h1>Post</h1>} />
+          <Route path='/post/:postId' element={<Post />} />
       </Routes>
       <Outlet />
     </Router>

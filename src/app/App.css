@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap');
 
 body {
-  background-color: hsl(183, 16%, 25%);
+  background-color: hsl(184, 40%, 16%);
   color: hsl(180, 5%, 91%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 nav {
   display: flex;
-  background-color: hsl(184, 17%, 16%);
+  background-color: hsl(184, 17%, 10%);
   padding: 0.5rem;
 }
 
@@ -16,26 +16,19 @@ section {
   margin: 0 1.5rem;
 }
 
-article {
-  margin: 1.3rem auto;
-  max-width: 700px;
-  background-color: hsl(184, 17%, 16%);
-  border-radius: 30px;
-}
-
 .linkButton {
   padding: 0rem 1rem;
-  color: hsl(163, 31%, 53%);
+  color: hsl(163, 61%, 53%);
   font-size: 1.8rem;
+  transition: all 0.4s ease;
 }
 
 .linkButton:visited {
-  color: hsl(163, 31%, 53%);
+  color: hsl(163, 61%, 53%);
 }
 
 .linkButton:hover {
-  color: hsl(163, 31%, 63%);
-  /*color: hsl(150, 75, 50);*/
+  color: hsl(180, 5%, 91%);
 }
 
 #search {
@@ -54,6 +47,8 @@ h1, h2 {
   font-family: 'Noto Serif JP', serif;
   flex-grow: 1;
   font-size: 1.8rem;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 h3 {
@@ -79,7 +74,9 @@ button:hover {
 
 .pageHeader {
   display: flex;
-  align-items: center;
+  align-items:flex-start;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
 }

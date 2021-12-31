@@ -11,39 +11,83 @@ h2 {
     font-size: 1.6rem;
 }
 
+/* The Post Summary Page */
+
 .activeTagsHeader {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     justify-content: center;
     align-items: center;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.postSummary {
+    margin: 1.3rem auto;
+    max-width: 700px;
+    background-color: hsl(184, 17%, 12%);
+    border-radius: 20px;
+    border: 2px solid hsla(180, 5%, 91%, 0%);
+    transition: all 0.4s ease;
+}
+  
+.postSummary:hover {
+    border: 2px solid hsla(180, 5%, 91%, 100%);
+    background-color: hsl(184, 17%, 16%);
 }
 
 .postCard {
     padding: 20px;
 }
 
-.postTitle {
-    margin-top: 0.5rem;
+.summaryTitle {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
 }
 
-.postContent {
+.summaryContent {
     font-size: 1.1rem;
 }
 
-.postMeta {
-    color: hsl(180, 2%, 55%);
+.summaryMeta {
+    color: hsl(180, 2%, 65%);
     display: flex;
     margin: 0;
     text-align: left;
     gap: 8px;
+    align-items:baseline;
 }
 
-.postedBy {
+.summaryPostedBy {
     flex-grow: 1;
 }
 
 .postTags {
     display: flex;
     gap: 8px;
+}
+
+/* The Detailed Post Page */
+
+.postDetailed {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.postMeta {
+    text-align: center;
+    background-color: hsl(184, 17%, 12%);
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.metaHighlight {
+    color: hsl(50, 100%, 50%);
+}
+
+.postContent {
+    text-align: left;
 }
 
