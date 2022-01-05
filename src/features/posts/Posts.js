@@ -1,7 +1,7 @@
 import './Posts.css';
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectPosts } from "./PostsSlice";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts, selectPosts } from "./PostsSlice.js";
 import { Link } from 'react-router-dom';
 import { selectActiveTags, selectTags } from "../tags/TagsSlice";
 import Tag from '../tags/Tag';
@@ -12,9 +12,12 @@ export default function Posts() {
     const tags = useSelector(selectTags);
     const currentTags = useSelector(selectActiveTags);
     const communities = useSelector(selectCommunities);
+    const dispatch = useDispatch();
 
-    // console.log('tags:' + tags['id1'].name);
-    // console.log(currentTags[0]);
+    useEffect(() => {
+        dispatch(fetchPosts('some data'));
+    }, []);
+
 
     const getTitleTags = () => {
         if (currentTags.length === 0) {
@@ -49,7 +52,7 @@ export default function Posts() {
                             <h2 className='summaryTitle'>{post.title}</h2>
                             <p className='summaryContent'>{post.content}</p>
                             <div className="summaryMeta">
-                                <span className='summaryPostedBy'>Posted by {post.author} in <span className='metaHighlight'>{communities[post.community].name}</span></span>
+                                <span className='summaryPostedBy'>Posted by <span className='author'>{post.author}</span> in <span className='metaHighlight'>{communities[post.community].name}</span></span>
                                 <div className="postTags">
                                     {Object.values(tags)
                                     .filter(tag => tag.communityIds.includes(post.community))

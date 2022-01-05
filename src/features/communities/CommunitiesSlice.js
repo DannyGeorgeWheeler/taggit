@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const testCommunities = {
-    giantbombId: {
-        id: 'giantbombId',
+    giantbomb: {
+        id: 'giantbomb',
         name: 'giantbomb'
     },
 

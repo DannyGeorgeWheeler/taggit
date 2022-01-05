@@ -11,6 +11,11 @@ h2 {
     font-size: 1.6rem;
 }
 
+h3 {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+}
+
 /* The Post Summary Page */
 
 .activeTagsHeader {
@@ -81,13 +86,46 @@ h2 {
     padding: 5px 10px;
     border-radius: 10px;
     width: fit-content;
+    margin: auto;
 }
 
 .metaHighlight {
     color: hsl(50, 100%, 50%);
 }
 
+.author {
+    color: hsl(30, 100%, 50%);
+}
+
 .postContent {
     text-align: left;
 }
 
+.comments {
+    text-align: left;
+    border-radius: 20px;
+    background-color: hsl(184, 17%, 12%);
+    color: hsl(180, 5%, 91%);
+    padding: 0.5rem 1rem;
+    margin-top: 2rem;
+}
+
+.comments * {
+    text-align: left;    
+}
+
+.comment {
+    background-color: hsl(184, 47%, 30%);
+    color: hsl(180, 5%, 91%);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+
+}
+
+blockquote {
+    color: #666;
+    margin: 0;
+    padding-left: 3em;
+    border-left: 0.5em #eee solid;
+}

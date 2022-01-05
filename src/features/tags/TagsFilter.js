@@ -8,6 +8,17 @@ import TagListItem from './TagListItem';
 export default function TagsFilter() {
     const tags = useSelector(selectTags);
 
+    const sortedTags = () => {
+        return Object.values(tags).sort((a,b) => {
+            if (a.name < b.name) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+    }
+
+
     return (
         <section>
             <header className='pageHeader'>
@@ -15,7 +26,7 @@ export default function TagsFilter() {
                 <Link to='/' className='closePage'><button>X</button></Link>
             </header>
             <div className='tagList'>
-                {Object.values(tags).map(tag => <TagListItem key={tag.id} tag={tag} />)}
+                {sortedTags().map(tag => <TagListItem key={tag.id} tag={tag} />)}
             </div>
         </section>
     )

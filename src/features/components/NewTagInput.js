@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { addCommunityTag, createTag, selectTags } from '../tags/TagsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
+
 export default function NewTagInput({id}) {
     const [inputText, setInputText] = useState('');
     const [buttonText, setButtonText] = useState('+');
     const [hidden, setHidden] = useState(true);
     const dispatch = useDispatch();
     const tags = useSelector(selectTags);
+
 
     const handleClick = () => {
         if (buttonText === 'Go') {
@@ -43,7 +45,7 @@ export default function NewTagInput({id}) {
         if (tag !== undefined) {
             dispatch(addCommunityTag({tagId: tag.id, communityId: id}));
         } else {
-            dispatch(createTag({id: newTag, name: newTag, communityIds: [id]}))
+            dispatch(createTag({id: newTag, name: newTag, communityIds: [id]}));
         }
         setInputText('');
         toggleHidden();
