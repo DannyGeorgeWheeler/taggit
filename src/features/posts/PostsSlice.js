@@ -1,21 +1,61 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, thunkAPI) => {
-    const response = await fetch('https://www.reddit.com/r/giantbomb/.json');
-    const json = await response.json();
-    const posts = {};
-    json.data.children.forEach(post => {
-        posts[post.data.id] = {
-            id: post.data.id,
-            author: post.data.author,
-            community: post.data.subreddit,
-            title: post.data.title,
-            content: post.data.selftext,
-            permalink: `https://www.reddit.com${post.data.permalink}.json`,
-            comments: [],
-        }
-    });
-    return posts;
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rejectWithValue}) => {
+    try {
+        const posts = {};
+
+        console.log(`data: ${data}`);
+
+        let response = await data.map(async community => {
+            return await fetch(`https://www.reddit.com/r/${community}/.json`);
+        });
+
+        console.log(response);
+
+        response = await Promise.all(response);
+
+        console.log(response);
+
+        let json = await response.map(async community => {
+            return await community.json();
+        })
+        json = await Promise.all(json);
+
+        json.forEach(community => community.data.children.forEach(post => {
+            posts[post.data.id] = {
+                id: post.data.id,
+                author: post.data.author,
+                community: post.data.subreddit,
+                title: post.data.title,
+                content: post.data.selftext,
+                permalink: `https://www.reddit.com${post.data.permalink}.json`,
+                comments: [],
+            }
+        }));
+
+        // const test = await data.map(async community => {
+        //     console.log(`community: ${community}`);
+        //     const response = await fetch(`https://www.reddit.com/r/${community}/.json`);
+        //     const json = await response.json();
+        //     json.data.children.forEach(post => {
+        //         posts[post.data.id] = {
+        //             id: post.data.id,
+        //             author: post.data.author,
+        //             community: post.data.subreddit,
+        //             title: post.data.title,
+        //             content: post.data.selftext,
+        //             permalink: `https://www.reddit.com${post.data.permalink}.json`,
+        //             comments: [],
+        //         }
+        //     });
+        //     return true;    
+        // })
+        console.log(posts);
+        return posts;    
+
+    } catch (error) {
+        return rejectWithValue(error);
+    }
 });
 
 export const fetchComments = createAsyncThunk('posts/fetchComments', async (post, {rejectWithValue}) => {
@@ -27,8 +67,8 @@ export const fetchComments = createAsyncThunk('posts/fetchComments', async (post
         json[1].data.children.forEach(comment => {
             comments.push(processComment(comment));
         });
-
         return {postId: post.id, messages: comments};  
+
     } catch (error) {
         return rejectWithValue(error);
     }
@@ -59,22 +99,13 @@ const tempPosts = {
         content: 'This is a block of text about how giant bomb has changed man, and is doing really weird stuff lately.',
         comments: []    
     },
-
-    id2: {
-        id: 'id2',
-        author: 'Tulu',
-        community: 'babiesId',
-        title: 'I\'m feeling so full',
-        content: 'Lately it feels like i will pop if im not careful about it.  Does anyone else get this feeling or is it just me? I hope my baby atlas doesn\'t get too big for his little home in my tummy.',    
-        comments: []
-    }
 }
 
 
 export const postsSlice = createSlice({
     name: 'posts',
     initialState: {
-        posts: tempPosts,
+        posts: {},
         status: 'idle',
     },
     reducers: {
@@ -90,9 +121,16 @@ export const postsSlice = createSlice({
         [fetchPosts.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             const newPosts = action.payload;
-            Object.keys(newPosts).map(id => state.posts[id] = newPosts[id]);
+            console.log('newposts');
+            console.log(Object.keys(newPosts));
+            Object.keys(newPosts).map(id => {
+                console.log(`id: ${id}`);
+                state.posts[id] = newPosts[id];
+            });
+            console.log(current(state.posts));
             //action.payload.map(post => state.posts[post.id] = post);
-            console.log(state.posts);
+            // console.log(current(state.posts));
+            // console.log('got the posts');
         },
         [fetchPosts.rejected]: (state, action) => {
             console.log(`rejected`, action.payload);

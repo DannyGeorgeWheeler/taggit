@@ -15,7 +15,14 @@ export default function Posts() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchPosts('some data'));
+        const activeCommunities = [];
+        currentTags.forEach(tag => {
+            tag.communityIds.forEach(community => {
+                !activeCommunities.includes(community) && activeCommunities.push(community);
+            });
+        });
+        console.log(activeCommunities);
+        dispatch(fetchPosts(activeCommunities));
     }, []);
 
 
@@ -31,6 +38,7 @@ export default function Posts() {
 
     const filterPosts = () => {
         return Object.values(posts).filter(post => {
+            // console.log(post);
             let includes = false;
             for (let i = 0; i < currentTags.length; i++) {
                 if(currentTags[i].communityIds.includes(post.community)) {

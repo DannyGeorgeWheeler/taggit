@@ -17,7 +17,7 @@ export default function Post() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const test = dispatch(fetchComments(posts[postId]));
+        dispatch(fetchComments(posts[postId]));
     }, []);
 
     const getReply = (reply, level = 0) => {
@@ -42,7 +42,8 @@ export default function Post() {
             </header>
             <div className='postDetailed'>
                 <h3 className='postMeta'>Posted by <span className='author'>{author}</span> in <span className='metaHighlight'>r/{communityName}</span></h3>
-                <p className='postContent'>{content}</p>
+                <ReactMarkdown className='postContent' children={content} remarkPlugins={[remarkGfm]}/>
+                {/* <p className='postContent'>{content}</p> */}
                 <div className='comments'>
                     <h2>Comments</h2>
                     {comments.map(comment => {
@@ -50,7 +51,7 @@ export default function Post() {
                             <details className='comment' key={comment.id} open>
                                 <summary>
                                     <h3><span className='author'>{comment.author}</span> says:</h3>
-                                    <ReactMarkdown children={comment.body} remarkPlugins={[remarkGfm]}/>
+                                    <ReactMarkdown className='replyContent' children={comment.body} remarkPlugins={[remarkGfm]}/>
                                 </summary>
                                 {comment.replies.length > 0 && comment.replies.map(reply => getReply(reply))}
                             </details>

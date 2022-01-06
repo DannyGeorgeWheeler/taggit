@@ -6,10 +6,12 @@ const testCommunities = {
         name: 'giantbomb'
     },
 
-    babiesId: {
-        id: 'babiesId',
-        name: 'babies'
-    }
+    witcher: {
+        id: 'witcher',
+        name: 'witcher'
+    },
+
+    
 }
 
 export const communitiesSlice = createSlice({

@@ -4,21 +4,21 @@ const testTags = {
     id1: {
         id: 'id1',
         name: 'humour',
-        communityIds: ['giantbomb', 'programmingHumourId'],
+        communityIds: ['giantbomb'],
         active: true
     },
 
     id2: {
         id: 'id2',
-        name: 'learning',
-        communityIds: ['babiesId'],
+        name: 'tv',
+        communityIds: ['witcher'],
         active: false
     },
 
     id3: {
         id: 'id3',
         name: 'gaming',
-        communityIds: ['giantbomb'],
+        communityIds: ['giantbomb', 'witcher'],
         active: false
     }
 }

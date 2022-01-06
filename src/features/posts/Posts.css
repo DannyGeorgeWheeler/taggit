@@ -97,7 +97,7 @@ h3 {
     color: hsl(30, 100%, 50%);
 }
 
-.postContent {
+.postContent * {
     text-align: left;
 }
 
@@ -125,6 +125,10 @@ h3 {
 
 .reply {
     padding-left: 0.5rem;
+}
+
+.replyContent blockquote {
+    color: black;
 }
 
 
