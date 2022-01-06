@@ -2,12 +2,11 @@ import './Posts.css';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectPosts, fetchPost } from './PostsSlice';
+import { selectPosts, fetchComments } from './PostsSlice';
 import { useParams } from 'react-router-dom';
 import { selectCommunities } from '../communities/CommunitiesSlice';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-
 
 export default function Post() {
     const posts = useSelector(selectPosts);
@@ -18,9 +17,22 @@ export default function Post() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const test = dispatch(fetchPost(posts[postId]));
-        console.log(test);
+        const test = dispatch(fetchComments(posts[postId]));
     }, []);
+
+    const getReply = (reply, level = 0) => {
+        const hasReplies = reply.replies.length > 0;
+
+        return (
+            <details className='reply' key={reply.id} open>
+                <summary>
+                    <h4><span className='author'>{reply.author}</span> says:</h4>
+                    <ReactMarkdown children={reply.body} remarkPlugins={[remarkGfm]}/>
+                </summary>
+                {hasReplies && reply.replies.map(reReply => getReply(reReply, level + 1))}
+            </details>
+        );
+    }
 
     return (
         <section>
@@ -35,10 +47,13 @@ export default function Post() {
                     <h2>Comments</h2>
                     {comments.map(comment => {
                         return (
-                            <div className='comment' key={comment.id}>
-                                <h3><span className='author'>{comment.author}</span> says:</h3>
-                                <ReactMarkdown children={comment.body} remarkPlugins={[remarkGfm]}/>
-                            </div>
+                            <details className='comment' key={comment.id} open>
+                                <summary>
+                                    <h3><span className='author'>{comment.author}</span> says:</h3>
+                                    <ReactMarkdown children={comment.body} remarkPlugins={[remarkGfm]}/>
+                                </summary>
+                                {comment.replies.length > 0 && comment.replies.map(reply => getReply(reply))}
+                            </details>
                         );
                     })}
                 </div>
@@ -46,3 +61,5 @@ export default function Post() {
         </section>
     )
 }
+
+//{comment.replies.length > 0 ? <ReactMarkdown children={comment.replies[0].body} remarkPlugins={[remarkGfm]}/> : <p>no replies</p>}

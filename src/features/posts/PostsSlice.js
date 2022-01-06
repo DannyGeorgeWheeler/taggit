@@ -18,19 +18,36 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, thun
     return posts;
 });
 
-export const fetchPost = createAsyncThunk('posts/fetchPost', async (post, thunkAPI) => {
-    const response = await fetch(post.permalink);
-    const json = await response.json();
-    const messages = [];
-    json[1].data.children.forEach(message => {
-        messages.push({
-            id: message.data.id,
-            author: message.data.author,
-            body: message.data.body,
+export const fetchComments = createAsyncThunk('posts/fetchComments', async (post, {rejectWithValue}) => {
+    console.log('fetching comments');
+    try {
+        const response = await fetch(post.permalink);
+        const json = await response.json();
+        const comments = [];
+        json[1].data.children.forEach(comment => {
+            comments.push(processComment(comment));
         });
-    });
-    return {postId: post.id, messages: messages};
-})
+
+        return {postId: post.id, messages: comments};  
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
+const processComment = comment => {
+    const obj = {
+        id: comment.data.id,
+        author: comment.data.author,
+        body: comment.data.body,
+        replies: [],
+    };
+    if (comment.data.replies !== '' && comment.kind === 't1') {
+        console.log(comment.data.replies);
+        comment.data.replies.data.children.forEach(reply => obj.replies.push(processComment(reply)));
+        console.log('processed replies');
+    };
+    return obj;
+}
 
 
 const tempPosts = {
@@ -39,7 +56,8 @@ const tempPosts = {
         author: 'Danny',
         community: 'giantbomb',
         title: 'Giant Bomb is doing weird stuff...',
-        content: 'This is a block of text about how giant bomb has changed man, and is doing really weird stuff lately.'    
+        content: 'This is a block of text about how giant bomb has changed man, and is doing really weird stuff lately.',
+        comments: []    
     },
 
     id2: {
@@ -47,7 +65,8 @@ const tempPosts = {
         author: 'Tulu',
         community: 'babiesId',
         title: 'I\'m feeling so full',
-        content: 'Lately it feels like i will pop if im not careful about it.  Does anyone else get this feeling or is it just me? I hope my baby atlas doesn\'t get too big for his little home in my tummy.'    
+        content: 'Lately it feels like i will pop if im not careful about it.  Does anyone else get this feeling or is it just me? I hope my baby atlas doesn\'t get too big for his little home in my tummy.',    
+        comments: []
     }
 }
 
@@ -70,24 +89,25 @@ export const postsSlice = createSlice({
         },
         [fetchPosts.fulfilled]: (state, action) => {
             state.status = 'succeeded';
-            state.posts = action.payload;
+            const newPosts = action.payload;
+            Object.keys(newPosts).map(id => state.posts[id] = newPosts[id]);
+            //action.payload.map(post => state.posts[post.id] = post);
             console.log(state.posts);
         },
         [fetchPosts.rejected]: (state, action) => {
-            console.log('rejected');
+            console.log(`rejected`, action.payload);
         },
-        [fetchPost.pending]: (state, action) => {
+        [fetchComments.pending]: (state, action) => {
             state.status = 'loading';
         },
-        [fetchPost.fulfilled]: (state, action) => {
+        [fetchComments.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             const { postId, messages } = action.payload;
             state.posts[postId].comments = messages;
             console.log(current(state.posts));
-            //state.posts = action.payload;
         },
-        [fetchPost.rejected]: (state, action) => {
-            console.log('rejected');
+        [fetchComments.rejected]: (state, action) => {
+            console.log(`rejected`, action.payload);
         }
 
     }
