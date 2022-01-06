@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { selectActiveTags, selectTags } from "../tags/TagsSlice";
 import Tag from '../tags/Tag';
 import { selectCommunities } from '../communities/CommunitiesSlice';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
 export default function Posts() {
     const posts = useSelector(selectPosts);
@@ -38,7 +39,6 @@ export default function Posts() {
 
     const filterPosts = () => {
         return Object.values(posts).filter(post => {
-            // console.log(post);
             let includes = false;
             for (let i = 0; i < currentTags.length; i++) {
                 if(currentTags[i].communityIds.includes(post.community)) {
@@ -46,6 +46,12 @@ export default function Posts() {
                 };
             }
             return includes;
+        }).sort((a,b) => {
+            if (a.time > b.time) {
+                return -1;
+            } else {
+                return 1;
+            }
         });
     }
 
@@ -53,14 +59,19 @@ export default function Posts() {
         <section>
             <h1 className='activeTagsHeader'>Active Tags: {getTitleTags()}</h1>
             {filterPosts().map(post => {
+                const d = new Date(0);
+                d.setUTCSeconds(post.time);
                 return (
                 <article key={post.id} className='postSummary'>
                     <Link key={post.id} to={`/post/${post.id}`} >
                         <div className='postCard'>
                             <h2 className='summaryTitle'>{post.title}</h2>
-                            <p className='summaryContent'>{post.content}</p>
+                            <ReactMarkdown className='summaryContent' children={post.content} />
+                            {/* <p className='summaryContent'>{post.content}</p> */}
                             <div className="summaryMeta">
-                                <span className='summaryPostedBy'>Posted by <span className='author'>{post.author}</span> in <span className='metaHighlight'>{communities[post.community].name}</span></span>
+                                <span className='summaryPostedBy'>
+                                    Posted by <span className='author'>{post.author}</span> in <span className='metaHighlight'>{communities[post.community].name}</span> on {d.toLocaleString()}
+                                    </span>
                                 <div className="postTags">
                                     {Object.values(tags)
                                     .filter(tag => tag.communityIds.includes(post.community))

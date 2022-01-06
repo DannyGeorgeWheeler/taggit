@@ -5,13 +5,7 @@ import communitiesReducer from '..//features/communities/CommunitiesSlice';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { 
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER, } from 'redux-persist';
+  persistReducer} from 'redux-persist';
 
 const reducers = combineReducers({
   posts: postsReducer,
