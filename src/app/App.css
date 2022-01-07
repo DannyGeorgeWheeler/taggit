@@ -31,7 +31,7 @@ section {
   color: hsl(180, 5%, 91%);
 }
 
-#search {
+#searchBar {
   flex-grow: 1;
   background-color: hsl(180, 5%, 91%);
   border-radius: 7px;

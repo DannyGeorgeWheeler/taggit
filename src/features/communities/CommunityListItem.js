@@ -11,7 +11,7 @@ export default function CommunityListItem({community}) {
 
     return (
         <div key={id} id='communities'>
-            <h3>r/{name}</h3>
+            <h3>r/{id}</h3>
             <div className='communityTags'>
                 {Object.values(tags)
                     .filter(tag => tag.communityIds.includes(id))

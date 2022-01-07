@@ -8,13 +8,15 @@ import Posts from '../features/posts/Posts';
 import TagsFilter from '../features/tags/TagsFilter';
 import Communities from '../features/communities/Communities';
 import Post from '../features/posts/Post';
+import SearchBar from '../features/search/SearchBar';
+import SearchResults from '../features/search/SearchResults';
 
 function App() {
   return (
     <Router>
       <nav>
         <NavLink to='/tags' className='linkButton' id='tagsButton'><FontAwesomeIcon icon={faTag} /></NavLink>
-        <input type='text' id='search' placeholder='Search Reddit'/>
+        <SearchBar />
         <NavLink to='/communities' className='linkButton' id='communitiesButton'><FontAwesomeIcon icon={faReddit} /></NavLink>
       </nav>
       <Routes>
@@ -22,6 +24,7 @@ function App() {
           <Route path='/tags' element={<TagsFilter />} />
           <Route path='/communities' element={<Communities />} />
           <Route path='/post/:postId' element={<Post />} />
+          <Route path='/search' element={<SearchResults />} />
       </Routes>
       <Outlet />
     </Router>

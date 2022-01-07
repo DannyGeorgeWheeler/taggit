@@ -1,0 +1,23 @@
+#searchResults {
+    margin: 1.3rem auto;
+    max-width: 700px;
+
+}
+
+.searchItem {
+    background-color: hsl(184, 17%, 12%);
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.searchItem h2 {
+    color: hsl(50, 100%, 50%);
+}
+
+.searchItemBottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}

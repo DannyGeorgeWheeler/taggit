@@ -21,7 +21,9 @@ export const communitiesSlice = createSlice({
     },
     reducers: {
         addCommunitiy: (state, action) => {
+            console.log(action.payload);
             const { id, name } = action.payload;
+            console.log(id, name);
             state.communities[id] = {
                 id: id,
                 name: name
