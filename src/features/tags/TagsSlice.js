@@ -26,7 +26,7 @@ const testTags = {
 export const tagsSlice = createSlice({
     name: 'tags',
     initialState: {
-        tags: testTags,
+        tags: {}
     },
     reducers: {
         createTag: (state, action) => {

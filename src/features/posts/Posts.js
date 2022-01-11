@@ -22,9 +22,8 @@ export default function Posts() {
                 !activeCommunities.includes(community) && activeCommunities.push(community);
             });
         });
-        console.log(activeCommunities);
         dispatch(fetchPosts(activeCommunities));
-    }, []);
+    }, [communities]);
 
 
     const getTitleTags = () => {
@@ -54,7 +53,7 @@ export default function Posts() {
             }
         });
     }
-
+    
     return (
         <section>
             <h1 className='activeTagsHeader'>Active Tags: {getTitleTags()}</h1>
@@ -65,9 +64,12 @@ export default function Posts() {
                 <article key={post.id} className='postSummary'>
                     <Link key={post.id} to={`/post/${post.id}`} >
                         <div className='postCard'>
-                            <h2 className='summaryTitle'>{post.title}</h2>
+                            <div className='summaryHeader'>
+                                <img className='communityIcon' src={communities[post.community].icon} alt=''/>
+                                <h2 className='summaryTitle'>{post.title}</h2>
+                            </div>
+                            {post.images.length > 0 && <img className='summaryImage' src={post.images[0].source} alt='' />}
                             <ReactMarkdown className='summaryContent' children={post.content} />
-                            {/* <p className='summaryContent'>{post.content}</p> */}
                             <div className="summaryMeta">
                                 <span className='summaryPostedBy'>
                                     Posted by <span className='author'>{post.author}</span> in <span className='metaHighlight'>{communities[post.community].name}</span> on {d.toLocaleString()}

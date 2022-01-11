@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const searchReddit = createAsyncThunk('search/searchReddit', async (term, {rejectWithValue}) => {
     try {
@@ -10,6 +10,7 @@ export const searchReddit = createAsyncThunk('search/searchReddit', async (term,
                 id: result.data['display_name'],
                 name: result.data['title'],
                 description: result.data['public_description'],
+                icon: result.data['icon_img'],
             })
         });
         return results;

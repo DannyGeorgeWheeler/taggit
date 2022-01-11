@@ -12,7 +12,6 @@ export default function SearchResults() {
         <section>
             <header className='pageHeader'>
                 <h1>Search for Communities</h1>
-                <Link to='/' className='closePage'><button>X</button></Link>
             </header>
             <div id='searchResults'>
                 {results.map(result => <SearchItem key={result.name} result={result} />)}

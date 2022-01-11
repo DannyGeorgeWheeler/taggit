@@ -12,7 +12,6 @@ export default function Communities() {
         <section>
             <header className='pageHeader'>
                 <h1>Communities </h1>
-                <Link to='/' className='closePage'><button>X</button></Link>
             </header>
             {Object.values(communities).map(community => <CommunityListItem key={community.id} community={community} />)}
         </section>

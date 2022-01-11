@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Outlet, NavLink, Routes } from 'react-router-dom';
 import './App.css';
-import { faTag } from '@fortawesome/free-solid-svg-icons';
+import { faTag, faHome } from '@fortawesome/free-solid-svg-icons';
 import { faReddit } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Posts from '../features/posts/Posts';
@@ -15,9 +15,12 @@ function App() {
   return (
     <Router>
       <nav>
-        <NavLink to='/tags' className='linkButton' id='tagsButton'><FontAwesomeIcon icon={faTag} /></NavLink>
-        <SearchBar />
-        <NavLink to='/communities' className='linkButton' id='communitiesButton'><FontAwesomeIcon icon={faReddit} /></NavLink>
+        <div className='navInner'>
+          <NavLink to='/' className='linkButton' id='homeButton'><FontAwesomeIcon icon={faHome} /></NavLink>
+          <NavLink to='/tags' className='linkButton' id='tagsButton'><FontAwesomeIcon icon={faTag} /></NavLink>
+          <NavLink to='/communities' className='linkButton' id='communitiesButton'><FontAwesomeIcon icon={faReddit} /></NavLink>
+          <SearchBar />
+        </div>
       </nav>
       <Routes>
           <Route path='/' element={<Posts />} />

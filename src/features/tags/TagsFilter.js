@@ -23,7 +23,6 @@ export default function TagsFilter() {
         <section>
             <header className='pageHeader'>
                 <h1>Filter by Tags </h1>
-                <Link to='/' className='closePage'><button>X</button></Link>
             </header>
             <div className='tagList'>
                 {sortedTags().map(tag => <TagListItem key={tag.id} tag={tag} />)}

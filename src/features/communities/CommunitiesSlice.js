@@ -4,6 +4,7 @@ const testCommunities = {
     giantbomb: {
         id: 'giantbomb',
         name: 'giantbomb'
+
     },
 
     witcher: {
@@ -17,16 +18,17 @@ const testCommunities = {
 export const communitiesSlice = createSlice({
     name: 'communities',
     initialState: {
-        communities: testCommunities,
+        communities: {},
     },
     reducers: {
         addCommunitiy: (state, action) => {
             console.log(action.payload);
-            const { id, name } = action.payload;
+            const { id, name, icon } = action.payload;
             console.log(id, name);
             state.communities[id] = {
                 id: id,
-                name: name
+                name: name,
+                icon: icon
             }
         },
 

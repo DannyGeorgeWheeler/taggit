@@ -29,9 +29,15 @@ export default function SearchItem({result}) {
 
     return (
         <div className='searchItem'>
-            <h2>{result.name}</h2>
-            <p>{result.description}</p>
-            <div className='searchItemBottom'><button onClick={handleClick}>{buttonText}</button><span>r/{result.id}</span></div>
+            <div className='searchItemHeader'>
+                <img className='communityIcon' src={result.icon} alt='' />
+                <h2>{result.name}</h2>
+            </div>
+            <p className='searchDescription'>{result.description}</p>
+            <div className='searchItemBottom'>
+                <button onClick={handleClick}>{buttonText}</button>
+                <span>r/{result.id}</span>
+            </div>
         </div>
     )
 }

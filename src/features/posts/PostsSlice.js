@@ -16,6 +16,27 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
         json = await Promise.all(json);
 
         json.forEach(community => community.data.children.forEach(post => {
+            const images = [];
+
+            // console.log(post.data);
+            
+            if(post.data['is_gallery'] || post.data['media_metadata'] !== undefined) {
+                Object.keys(post.data['media_metadata']).forEach(img => {
+                    images.push({
+                        source: fixImgUrl(post.data['media_metadata'][img].s.u),
+                        // preview: fixImgUrl(post.data['media_metadata'][img].p[2].u)
+                    })
+                });
+            } else if(post.data['is_reddit_media_domain']) {
+                console.log('single image');
+                images.push({
+                    source: fixImgUrl(post.data.preview.images[0].source.url),
+                    // preview: fixImgUrl(post.data.preview.images[0].resolutions[2].url) 
+                });
+                console.log(images);
+            }
+
+
             posts[post.data.id] = {
                 id: post.data.id,
                 author: post.data.author,
@@ -25,7 +46,10 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
                 permalink: `https://www.reddit.com${post.data.permalink}.json`,
                 comments: [],
                 time: post.data.created,
+                images: images,
             }
+
+            // console.log(posts[post.data.id].images);
         }));
 
         return posts;    
@@ -34,6 +58,13 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
         return rejectWithValue(error);
     }
 });
+
+const fixImgUrl = url => {
+    // console.log(`the url: ${url}`);
+    const newUrl = url.replace(/&amp;/g, '&');
+    // console.log(newUrl);
+    return newUrl;
+}
 
 export const fetchComments = createAsyncThunk('posts/fetchComments', async (post, {rejectWithValue}) => {
     try {

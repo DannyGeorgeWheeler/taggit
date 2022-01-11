@@ -1,12 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
-import postsReducer from '../features/posts/PostsSlice';
-import tagsReducer from '../features/tags/TagsSlice';
-import communitiesReducer from '..//features/communities/CommunitiesSlice';
-import searchReducer from '../features/search/SearchSlice';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
-import { 
-  persistReducer} from 'redux-persist';
+import { persistReducer, PERSIST } from 'redux-persist';
+
+import postsReducer from '../features/posts/PostsSlice';
+import tagsReducer from '../features/tags/TagsSlice';
+import communitiesReducer from '../features/communities/CommunitiesSlice';
+import searchReducer from '../features/search/SearchSlice';
+
 
 const reducers = combineReducers({
   posts: postsReducer,
@@ -17,11 +18,16 @@ const reducers = combineReducers({
 
 const persistConfig = {
   key: 'posts',
-  storage,
+  storage
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
   reducer: persistedReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [PERSIST]
+    }
+  })
 });

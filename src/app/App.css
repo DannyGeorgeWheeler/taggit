@@ -1,26 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap');
 
 body {
-  background-color: hsl(184, 40%, 16%);
+  background-color: hsl(184, 17%, 10%);
   color: hsl(180, 5%, 91%);
   font-family: 'Segoe UI', sans-serif;
 }
 
 nav {
-  display: flex;
-  background-color: hsl(184, 17%, 10%);
-  padding: 0.5rem;
+  background-color: hsl(184, 40%, 15%);
+  position: sticky;
+  top: 0;
 }
 
 section {
   margin: 0 1.5rem;
 }
 
+.navInner {
+  display: flex;
+  background-color: hsl(184, 40%, 15%);
+  padding: 1rem;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 .linkButton {
-  padding: 0rem 1rem;
   color: hsl(163, 61%, 53%);
-  font-size: 1.8rem;
+  font-size: 2rem;
   transition: all 0.4s ease;
+  text-align: center;
 }
 
 .linkButton:visited {
@@ -58,7 +67,7 @@ h3 {
 button {
   background-color: hsl(50, 100%, 50%);
   border: none;
-  border-radius: 20px;
+  border-radius: 3px;
   padding: 0.3rem 0.5rem;
   transition: all .3s ease;
   text-transform: uppercase;
@@ -69,14 +78,15 @@ button:hover {
   background-color: hsl(180, 5%, 91%);
   color: #222;
   cursor: pointer;
-  transition: all .3s ease;
 }
 
 .pageHeader {
-  display: flex;
-  align-items:flex-start;
-  justify-content: center;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.communityIcon {
+  border-radius: 360px;
+  width: 40px;
+  height: 40px;
 }

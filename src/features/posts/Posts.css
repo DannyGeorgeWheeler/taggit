@@ -9,6 +9,7 @@ a:visited {
 
 h2 {
     font-size: 1.6rem;
+    margin-bottom: 1rem;
 }
 
 h3 {
@@ -24,31 +25,47 @@ h3 {
     gap: 8px;
     justify-content: center;
     align-items: center;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
 .postSummary {
     margin: 1.3rem auto;
     max-width: 700px;
-    background-color: hsl(184, 17%, 12%);
-    border-radius: 20px;
-    border: 2px solid hsla(180, 5%, 91%, 0%);
-    transition: all 0.4s ease;
+    background-color: hsl(184, 50%, 20%);
+    border-radius: 5px;
+    border: 2px solid hsla(184, 40%, 16%, 0%);
+    transition: all 0.3s ease;
 }
   
 .postSummary:hover {
     border: 2px solid hsla(180, 5%, 91%, 100%);
-    background-color: hsl(184, 17%, 16%);
+    background-color: hsl(184, 50%, 24%);
 }
 
 .postCard {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.summaryHeader {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .summaryTitle {
     margin-top: 0;
-    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.summaryImage {
+    border-radius: 5px;
+    max-height: 400px;
+    object-fit: cover;
+    border: #111 solid 2px;
 }
 
 .summaryContent * {
@@ -65,7 +82,7 @@ h3 {
     margin: 0;
     text-align: left;
     gap: 8px;
-    align-items:baseline;
+    align-items: flex-end;
 }
 
 .summaryPostedBy {
@@ -81,7 +98,13 @@ h3 {
 
 .postDetailed {
     max-width: 700px;
-    margin: 0 auto;
+    margin: 2rem auto;
+    background-color: hsl(184, 50%, 20%);
+    border-radius: 5px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .postMeta {
@@ -101,8 +124,18 @@ h3 {
     color: hsl(30, 100%, 50%);
 }
 
+.detailedImage {
+    display: block;
+    max-width: 100%;
+    max-height: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    border: #111 solid 2px;
+}
+
 .postContent {
-    margin: 3rem 0;
+    /* margin: 3rem 0; */
 }
 
 .postContent *, .comments * {
@@ -112,28 +145,41 @@ h3 {
 
 .comments {
     text-align: left;
-    border-radius: 20px;
-    background-color: hsl(184, 17%, 12%);
+    border-radius: 5px;
     color: hsl(180, 5%, 91%);
-    padding: 0.5rem 1rem;
     margin-top: 2rem;
 }
 
 .comment {
     background-color: hsl(184, 47%, 30%);
     color: hsl(180, 5%, 91%);
-    border-radius: 10px;
+    border-radius: 3px;
     padding: 0.5rem 1rem;
-    margin-top: 1rem;
+    margin-top: 0.2rem;
 
-}
-
-.reply {
-    padding-left: 0.5rem;
 }
 
 .replyContent blockquote {
     color: black;
+}
+
+.replies {
+    padding-left: 0.4rem;
+    transition: all 0.5s ease;
+    max-height: 10000px;
+    border-left: hsl(180, 5%, 91%) solid 1px;
+}
+
+.hideReplies {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.repliesButton {
+    border-radius: 3px;
+    padding: 2px 5px;
+    background-color: cadetblue;
 }
 
 
