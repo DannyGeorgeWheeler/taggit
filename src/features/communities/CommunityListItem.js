@@ -3,7 +3,7 @@ import React from 'react';
 import Tag from '../tags/Tag';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTags } from '../tags/TagsSlice';
-import NewTagInput from '../components/NewTagInput';
+import NewTagInput from './NewTagInput';
 import { removeCommunity } from './CommunitiesSlice';
 
 export default function CommunityListItem({community}) {
