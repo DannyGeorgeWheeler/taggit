@@ -1,15 +1,18 @@
 import './Tags.css';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeCommunityTag, selectTags } from './TagsSlice';
+import { removeCommunityTag, selectTags, deleteTag } from './TagsSlice';
 
 export default function Tag({tagId, communityId = undefined}) {
     const dispatch = useDispatch();
     const tags = useSelector(selectTags);
 
     const handleClick = (event) => {
-        //console.log(`tagId: ${tagId} communityId: ${communityId}`)
-        dispatch(removeCommunityTag({tagId, communityId}))
+        if (tags[tagId].communityIds.length === 1) {
+            dispatch(deleteTag(tagId));
+        } else {
+            dispatch(removeCommunityTag({tagId, communityId}));
+        }
     }
 
     const renderDeleteButton = () => {
@@ -22,3 +25,4 @@ export default function Tag({tagId, communityId = undefined}) {
         </span>
     );
 }
+

@@ -30,7 +30,6 @@ export const tagsSlice = createSlice({
     },
     reducers: {
         createTag: (state, action) => {
-            console.log('tag created');
             const { id, name, communityIds = [] } = action.payload;
             state.tags[id] = {
                 id: id,
@@ -40,9 +39,9 @@ export const tagsSlice = createSlice({
             }
         },
 
-        removeTag: (state, action) => {
-            const { id } = action.payload;
-            delete state.tags[id];
+        deleteTag: (state, action) => {
+            const tagId = action.payload;
+            delete state.tags[tagId];
         },
 
         addCommunityTag: (state, action) => {
