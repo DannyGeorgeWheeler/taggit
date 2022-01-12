@@ -7,6 +7,8 @@ import { selectActiveTags, selectTags } from "../tags/TagsSlice";
 import Tag from '../tags/Tag';
 import { selectCommunities } from '../communities/CommunitiesSlice';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import { faComment, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Posts() {
     const posts = useSelector(selectPosts);
@@ -66,14 +68,20 @@ export default function Posts() {
                         <div className='postCard'>
                             <div className='summaryHeader'>
                                 <img className='communityIcon' src={communities[post.community].icon} alt=''/>
-                                <h2 className='summaryTitle'>{post.title}</h2>
+                                <div className='summaryHeaderText'>
+                                    <span className='summaryPostedBy'>
+                                        Posted by <span className='author'>{post.author}</span> in <span className='metaHighlight'>{communities[post.community].name}</span> on {d.toLocaleString()}
+                                    </span>
+                                    <h2 className='summaryTitle'>{post.title}</h2>
+                                </div>
                             </div>
                             {post.images.length > 0 && <img className='summaryImage' src={post.images[0].source} alt='' />}
+                            {post.video.length > 0 && <video className='summaryImage' src={post.video} type='video/mp4' alt='' controls/>}
                             <ReactMarkdown className='summaryContent' children={post.content} />
                             <div className="summaryMeta">
-                                <span className='summaryPostedBy'>
-                                    Posted by <span className='author'>{post.author}</span> in <span className='metaHighlight'>{communities[post.community].name}</span> on {d.toLocaleString()}
-                                    </span>
+                                <span className='summaryMetaText'>
+                                <FontAwesomeIcon icon={faComment} /> {post.numComments} Comments &nbsp; <FontAwesomeIcon icon={faArrowAltCircleUp} /> {post.ups} Votes
+                                </span>
                                 <div className="postTags">
                                     {Object.values(tags)
                                     .filter(tag => tag.communityIds.includes(post.community))

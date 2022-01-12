@@ -53,7 +53,7 @@ h3 {
 .summaryHeader {
     display: flex;
     gap: 1.5rem;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .summaryTitle {
@@ -77,7 +77,7 @@ h3 {
 }
 
 .summaryMeta {
-    color: hsl(180, 2%, 65%);
+    color: hsl(180, 2%, 80%);
     display: flex;
     margin: 0;
     text-align: left;
@@ -86,6 +86,12 @@ h3 {
 }
 
 .summaryPostedBy {
+    font-size: 0.8rem;
+    color: hsl(180, 2%, 65%);
+}
+
+.summaryMetaText {
+    font-size: 1rem;
     flex-grow: 1;
 }
 
@@ -132,10 +138,6 @@ h3 {
     margin-right: auto;
     border-radius: 5px;
     border: #111 solid 2px;
-}
-
-.postContent {
-    /* margin: 3rem 0; */
 }
 
 .postContent *, .comments * {

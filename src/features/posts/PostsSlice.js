@@ -17,16 +17,21 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
 
         json.forEach(community => community.data.children.forEach(post => {
             const images = [];
+            let video = '';
 
             // console.log(post.data);
             
-            if(post.data['is_gallery'] || post.data['media_metadata'] !== undefined) {
+            if(post.data['is_video']) {
+                video = post.data.media['reddit_video']['fallback_url'];
+
+            } else if(post.data['is_gallery'] || post.data['media_metadata'] !== undefined){
                 Object.keys(post.data['media_metadata']).forEach(img => {
                     images.push({
                         source: fixImgUrl(post.data['media_metadata'][img].s.u),
                         // preview: fixImgUrl(post.data['media_metadata'][img].p[2].u)
                     })
                 });
+
             } else if(post.data['is_reddit_media_domain']) {
                 console.log('single image');
                 images.push({
@@ -45,8 +50,11 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
                 content: post.data.selftext,
                 permalink: `https://www.reddit.com${post.data.permalink}.json`,
                 comments: [],
+                numComments: post.data['num_comments'],
+                ups: post.data.ups,
                 time: post.data.created,
                 images: images,
+                video: video,
             }
 
             // console.log(posts[post.data.id].images);

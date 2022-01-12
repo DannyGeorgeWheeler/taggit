@@ -2,7 +2,6 @@ import './Tags.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectTags } from './TagsSlice';
-import { Link } from 'react-router-dom';
 import TagListItem from './TagListItem';
 
 export default function TagsFilter() {

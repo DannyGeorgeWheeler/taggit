@@ -1,6 +1,5 @@
 import './Posts.css';
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPosts, fetchComments } from './PostsSlice';
 import { useParams } from 'react-router-dom';
@@ -13,7 +12,7 @@ export default function Post() {
     const posts = useSelector(selectPosts);
     const communities = useSelector(selectCommunities)
     let { postId } = useParams();
-    const { author, community, title, content, comments, images } = posts[postId];
+    const { author, community, title, content, comments, images, video } = posts[postId];
     const communityName = communities[community].name;
     const dispatch = useDispatch();
 
@@ -26,7 +25,8 @@ export default function Post() {
             <div className='postDetailed'>
                 <h1>{title}</h1>
                 <h3 className='postMeta'>Posted by <span className='author'>{author}</span> in <span className='metaHighlight'>r/{communityName}</span></h3>
-                {images.length > 0 && <a href={images[0].source} target='_blank'><img className='detailedImage' src={images[0].source} alt='' /></a>}
+                {images.length > 0 && <a href={images[0].source} target='_blank' rel='noopener noreferrer'><img className='detailedImage' src={images[0].source} alt='' /></a>}
+                {video.length > 0 && <video className='summaryImage' src={video} alt='' controls/>}
                 <ReactMarkdown className='postContent' children={content} remarkPlugins={[remarkGfm]}/>
                 <div className='comments'>
                     <h2>Comments</h2>
