@@ -15,42 +15,46 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
         })
         json = await Promise.all(json);
 
-        json.forEach(community => community.data.children.forEach(post => {
-            const images = [];
-            let video = '';
-
-            if(post.data['is_video']) {
-                video = post.data.media['reddit_video']['fallback_url'];
-
-            } else if(post.data['is_gallery'] || post.data['media_metadata'] !== undefined){
-                Object.keys(post.data['media_metadata']).forEach(img => {
-                    images.push({
-                        source: fixImgUrl(post.data['media_metadata'][img].s.u),
-                    })
-                });
-
-            } else if(post.data['is_reddit_media_domain']) {
-                images.push({
-                    source: fixImgUrl(post.data.url),
+        json.forEach(community => {
+            if (community.data) {
+                community.data.children.forEach(post => {
+                    const images = [];
+                    let video = '';
+        
+                    if(post.data['is_video']) {
+                        video = post.data.media['reddit_video']['fallback_url'];
+        
+                    } else if(post.data['is_gallery'] || post.data['media_metadata'] !== undefined){
+                        Object.keys(post.data['media_metadata']).forEach(img => {
+                            images.push({
+                                source: fixImgUrl(post.data['media_metadata'][img].s.u),
+                            })
+                        });
+        
+                    } else if(post.data['is_reddit_media_domain']) {
+                        images.push({
+                            source: fixImgUrl(post.data.url),
+                        });
+                    }
+        
+        
+                    posts[post.data.id] = {
+                        id: post.data.id,
+                        author: post.data.author,
+                        community: post.data.subreddit,
+                        title: post.data.title,
+                        content: post.data.selftext,
+                        permalink: `https://www.reddit.com${post.data.permalink}.json`,
+                        comments: [],
+                        numComments: post.data['num_comments'],
+                        ups: post.data.ups,
+                        time: post.data.created,
+                        images: images,
+                        video: video,
+                    }
                 });
             }
-
-
-            posts[post.data.id] = {
-                id: post.data.id,
-                author: post.data.author,
-                community: post.data.subreddit,
-                title: post.data.title,
-                content: post.data.selftext,
-                permalink: `https://www.reddit.com${post.data.permalink}.json`,
-                comments: [],
-                numComments: post.data['num_comments'],
-                ups: post.data.ups,
-                time: post.data.created,
-                images: images,
-                video: video,
-            }
-        }));
+        });
 
         return posts;    
 
