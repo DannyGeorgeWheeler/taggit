@@ -75,7 +75,8 @@ export default function Posts() {
                                     <h2 className='summaryTitle'>{post.title}</h2>
                                 </div>
                             </div>
-                            {post.images.length > 0 && <img className='summaryImage' src={post.images[0].source} alt='' />}
+                            {post.images.length === 1 && <img className='summaryImage' src={post.images[0].source} alt='' />}
+                            {post.images.length > 1 && <div className='summaryGallery'><img className='summaryImage' src={post.images[0].source} alt='' /><span className='galleryText'>Gallery</span></div>}
                             {post.video.length > 0 && <video className='summaryImage' src={post.video} type='video/mp4' alt='' controls/>}
                             <ReactMarkdown className='summaryContent' children={post.content} />
                             <div className="summaryMeta">

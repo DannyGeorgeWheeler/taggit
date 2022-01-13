@@ -61,11 +61,27 @@ h3 {
     text-align: left;
 }
 
+.summaryGallery {
+    position: relative;
+}
+
+.galleryText {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 1.5rem;
+    background-color: hsla(180, 5%, 95%, 40%);
+    color: hsla(180, 5%, 5%, 100%);
+    padding: 4px 10px;
+    border-radius: 3px;
+}
+
 .summaryImage {
     border-radius: 5px;
     max-height: 400px;
     object-fit: cover;
     border: #111 solid 2px;
+    max-width: 100%;
 }
 
 .summaryContent * {
@@ -182,32 +198,6 @@ h3 {
     border-radius: 3px;
     padding: 2px 5px;
     background-color: cadetblue;
-}
-
-
-details summary {
-    list-style: none;
-    cursor: pointer;
-}
-
-details summary::marker {
-    display: none;
-}
-
-summary::after {
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-size: 0.7rem;
-    content: '^';
-}
-
-details[open] summary::after {
-    content: 'v';
-}
-
-summary:hover::after{
-    background-color: hsl(184, 47%, 40%);
 }
 
 h4 {

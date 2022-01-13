@@ -7,6 +7,7 @@ import { selectCommunities } from '../communities/CommunitiesSlice';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Comment from './Comments';
+import Gallery from '../gallery/Gallery';
 
 export default function Post() {
     const posts = useSelector(selectPosts);
@@ -25,7 +26,8 @@ export default function Post() {
             <div className='postDetailed'>
                 <h1>{title}</h1>
                 <h3 className='postMeta'>Posted by <span className='author'>{author}</span> in <span className='metaHighlight'>r/{communityName}</span></h3>
-                {images.length > 0 && <a href={images[0].source} target='_blank' rel='noopener noreferrer'><img className='detailedImage' src={images[0].source} alt='' /></a>}
+                {images.length === 1 && <a href={images[0].source} target='_blank' rel='noopener noreferrer'><img className='detailedImage' src={images[0].source} alt='' /></a>}
+                {images.length > 1 && <Gallery images={images}/>}
                 {video.length > 0 && <video className='summaryImage' src={video} alt='' controls/>}
                 <ReactMarkdown className='postContent' children={content} remarkPlugins={[remarkGfm]}/>
                 <div className='comments'>

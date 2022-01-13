@@ -1,0 +1,48 @@
+.galleryContainer {
+    display: grid;
+    margin: 0 auto;
+}
+
+.galleryImage {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 100%;
+    max-height: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    border: #111 solid 2px;
+}
+
+.hideImage {
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.nextButton, .prevButton {
+    grid-row: 1;
+    grid-column: 1;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: 50%;
+    background-color: hsla(180, 5%, 91%, 35%);
+    color: hsla(180, 5%, 5%, 85%);
+    font-size: 2rem;
+}
+
+.nextButton:hover, .prevButton:hover {
+    background-color: hsla(180, 5%, 91%, 65%);
+    color: hsla(180, 5%, 5%, 85%);
+}
+
+
+.nextButton {
+    left: calc(100% - 50px);
+    border-radius: 5px 0 0 5px;
+}
+
+.prevButton {
+    left: 2px;
+    border-radius: 0 5px 5px 0;
+}
