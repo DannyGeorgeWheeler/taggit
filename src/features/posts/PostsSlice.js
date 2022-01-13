@@ -31,7 +31,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
 
             } else if(post.data['is_reddit_media_domain']) {
                 images.push({
-                    source: fixImgUrl(post.data.preview.images[0].source.url),
+                    source: fixImgUrl(post.data.url),
                 });
             }
 
