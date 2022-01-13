@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const searchReddit = createAsyncThunk('search/searchReddit', async (term, {rejectWithValue}) => {
     try {
+        const defaultIcon = 'https://styles.redditmedia.com/t5_6/styles/communityIcon_a8uzjit9bwr21.png?width=256&s=d28ea66f16da5a6c2ccae0d069cc4d42322d69a9';
         const results = [];
         const response = await fetch(`https://www.reddit.com/search/.json?q=${term}&source=recent&type=sr`);
         const json = await response.json();
@@ -10,7 +11,7 @@ export const searchReddit = createAsyncThunk('search/searchReddit', async (term,
                 id: result.data['display_name'],
                 name: result.data['title'],
                 description: result.data['public_description'],
-                icon: result.data['icon_img'],
+                icon: result.data['community_icon'] !== '' ? fixUrl(result.data['community_icon']) : defaultIcon,
             })
         });
         return results;
@@ -18,7 +19,12 @@ export const searchReddit = createAsyncThunk('search/searchReddit', async (term,
     } catch (error) {
         return rejectWithValue(error);
     }
-})
+});
+
+const fixUrl = url => {
+    const newUrl = url.replace(/&amp;/g, '&');
+    return newUrl;
+};
 
 export const searchSlice = createSlice({
     name: 'search',
