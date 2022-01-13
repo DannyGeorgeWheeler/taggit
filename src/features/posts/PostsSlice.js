@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rejectWithValue}) => {
     try {
@@ -19,8 +19,6 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
             const images = [];
             let video = '';
 
-            // console.log(post.data);
-            
             if(post.data['is_video']) {
                 video = post.data.media['reddit_video']['fallback_url'];
 
@@ -28,17 +26,13 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
                 Object.keys(post.data['media_metadata']).forEach(img => {
                     images.push({
                         source: fixImgUrl(post.data['media_metadata'][img].s.u),
-                        // preview: fixImgUrl(post.data['media_metadata'][img].p[2].u)
                     })
                 });
 
             } else if(post.data['is_reddit_media_domain']) {
-                console.log('single image');
                 images.push({
                     source: fixImgUrl(post.data.preview.images[0].source.url),
-                    // preview: fixImgUrl(post.data.preview.images[0].resolutions[2].url) 
                 });
-                console.log(images);
             }
 
 
@@ -56,8 +50,6 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
                 images: images,
                 video: video,
             }
-
-            // console.log(posts[post.data.id].images);
         }));
 
         return posts;    
@@ -68,9 +60,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
 });
 
 const fixImgUrl = url => {
-    // console.log(`the url: ${url}`);
     const newUrl = url.replace(/&amp;/g, '&');
-    // console.log(newUrl);
     return newUrl;
 }
 
@@ -115,7 +105,7 @@ export const postsSlice = createSlice({
         }
     },
     extraReducers: {
-        [fetchPosts.pending]: (state, action) => {
+        [fetchPosts.pending]: (state) => {
             state.status = 'loading';
         },
         [fetchPosts.fulfilled]: (state, action) => {
@@ -128,14 +118,13 @@ export const postsSlice = createSlice({
         [fetchPosts.rejected]: (state, action) => {
             console.log(`rejected`, action.payload);
         },
-        [fetchComments.pending]: (state, action) => {
+        [fetchComments.pending]: (state) => {
             state.status = 'loading';
         },
         [fetchComments.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             const { postId, messages } = action.payload;
             state.posts[postId].comments = messages;
-            console.log(current(state.posts));
         },
         [fetchComments.rejected]: (state, action) => {
             console.log(`rejected`, action.payload);

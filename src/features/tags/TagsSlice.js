@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const testTags = {
-    id1: {
-        id: 'id1',
-        name: 'humour',
-        communityIds: ['giantbomb'],
-        active: true
+const initialTags = {
+    tv: {
+        id: 'tv',
+        name: 'tv',
+        communityIds: ['MrRobot'],
+        active: false
     },
 
-    id2: {
-        id: 'id2',
-        name: 'tv',
-        communityIds: ['witcher'],
-        active: false
+    games: {
+        id: 'games',
+        name: 'games',
+        communityIds: ['Eldenring', 'Witcher3'],
+        active: true
     },
 
     id3: {
         id: 'id3',
-        name: 'gaming',
-        communityIds: ['giantbomb', 'witcher'],
+        name: 'dev',
+        communityIds: ['webdev', 'ProgrammerHumor'],
         active: false
     }
 }
@@ -26,7 +26,7 @@ const testTags = {
 export const tagsSlice = createSlice({
     name: 'tags',
     initialState: {
-        tags: {}
+        tags: initialTags
     },
     reducers: {
         createTag: (state, action) => {

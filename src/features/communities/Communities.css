@@ -16,6 +16,10 @@
     width:150px;
 }
 
+.communityHeader h2 {
+    word-wrap: break-word;
+}
+
 .unfollowButton {
     top: 10px;
     right: 10px;
