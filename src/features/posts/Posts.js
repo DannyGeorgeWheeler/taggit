@@ -68,13 +68,11 @@ export default function Posts() {
                         <div className='postCard'>
                             <div className='summaryHeader'>
                                 <img className='communityIcon' src={communities[post.community].icon} alt=''/>
-                                <div className='summaryHeaderText'>
-                                    <span className='summaryPostedBy'>
-                                        Posted by <span className='author'>{post.author}</span> in <span className='metaHighlight'>{communities[post.community].name}</span> on {d.toLocaleString()}
-                                    </span>
-                                    <h2 className='summaryTitle'>{post.title}</h2>
-                                </div>
+                                <span className='summaryPostedBy'>
+                                    Posted by <span className='author'>{post.author}</span> in <span className='metaHighlight'>{communities[post.community].name}</span> on {d.toLocaleString()}
+                                </span>
                             </div>
+                            <h2 className='summaryTitle'>{post.title}</h2>
                             {post.images.length === 1 && <img className='summaryImage' src={post.images[0].source} alt='' />}
                             {post.images.length > 1 && <div className='summaryGallery'><img className='summaryImage' src={post.images[0].source} alt='' /><span className='galleryText'>Gallery</span></div>}
                             {post.video.length > 0 && <video className='summaryImage' src={post.video} type='video/mp4' alt='' controls/>}

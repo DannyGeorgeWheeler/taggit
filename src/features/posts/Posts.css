@@ -57,7 +57,7 @@ h3 {
 }
 
 .summaryTitle {
-    margin-top: 0;
+    margin: 0;
     text-align: left;
 }
 
@@ -85,6 +85,7 @@ h3 {
 }
 
 .summaryContent * {
+    margin: 0;
     text-align: left;
     font-size: 1.1rem;
     line-height: 1.5rem;
@@ -104,6 +105,7 @@ h3 {
 .summaryPostedBy {
     font-size: 0.8rem;
     color: hsl(180, 2%, 65%);
+    /* line-height: 0; */
 }
 
 .summaryMetaText {
