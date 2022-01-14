@@ -31,13 +31,11 @@ export default function SearchItem({result}) {
         <div className='searchItem'>
             <div className='searchItemHeader'>
                 <img className='communityIcon' src={result.icon} alt='' />
-                <h2>{result.name}</h2>
-            </div>
-            <p className='searchDescription'>{result.description}</p>
-            <div className='searchItemBottom'>
-                <button onClick={handleClick}>{buttonText}</button>
                 <span>r/{result.id}</span>
+                <button onClick={handleClick}>{buttonText}</button>
             </div>
+            <h2>{result.name}</h2>
+            <p className='searchDescription'>{result.description}</p>
         </div>
     )
 }

@@ -9,7 +9,7 @@ import { removeCommunity } from './CommunitiesSlice';
 export default function CommunityListItem({community}) {
     const tags = useSelector(selectTags);
     const dispatch = useDispatch();
-    let { id } = community;
+    let { id, name, icon, description } = community;
 
     const handleClick = () => {
         dispatch(removeCommunity(community));
@@ -18,18 +18,21 @@ export default function CommunityListItem({community}) {
     return (
         <div key={id} className='communities'>
             <div className='communityHeader'>
-                <h2>r/{id}</h2>
+                <img className='communityIcon' src={icon} alt='' />
+                <span>r/{id}</span>
                 <button onClick={handleClick} className='unfollowButton'>
                     Unfollow
                 </button>
             </div>
+            <h2>{name}</h2>
+            <p className='communityDescription'>{description}</p>
+            <NewTagInput id={id} />
             <div className='communityTags'>
                 {Object.values(tags)
                     .filter(tag => tag.communityIds.includes(id))
                     .map(tag => <Tag key={tag.id} tagId={tag.id} communityId={id}/>)
                 }
             </div>
-            <NewTagInput id={id} />
         </div>
     )
 }

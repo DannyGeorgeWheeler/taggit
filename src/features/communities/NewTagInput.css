@@ -1,10 +1,7 @@
 .tagInputContainer {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     gap: 0.8rem;
-    padding: 20px;
-    max-width: 100px;
+    margin: 0;
 } 
 
 .tagInput {
@@ -12,4 +9,17 @@
     border-radius: 3px;
     outline: none;
     padding: 4px;
+    flex-grow: 0;
 }
+
+.addButton {
+    color:  hsl(180, 5%, 91%);
+    background-color: hsl(163, 61%, 33%);
+}
+
+@media only screen and (max-width: 480px) {
+    .tagInput {
+        flex-grow: 1;
+    }
+}
+
