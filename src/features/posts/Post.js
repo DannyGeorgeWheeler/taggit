@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { selectCommunities } from '../communities/CommunitiesSlice';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import Comment from './Comments';
+import Comment from './Comment';
 import Gallery from '../gallery/Gallery';
 
 export default function Post() {
@@ -32,7 +32,7 @@ export default function Post() {
                 <ReactMarkdown className='postContent' children={content} remarkPlugins={[remarkGfm]}/>
                 <div className='comments'>
                     <h2>Comments</h2>
-                    {comments.length > 0 ? comments.map(comment => <Comment comment={comment} />) : <em>Empty</em>}
+                    {comments.length > 0 ? comments.map(comment => <Comment key={comment.id} comment={comment} />) : <em>Empty</em>}
                 </div>
             </div>
         </section>
