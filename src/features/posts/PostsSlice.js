@@ -3,9 +3,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rejectWithValue}) => {
     try {
         const posts = {};
+        const limit = Math.floor(30 / data.length);
+
+        console.log(`limit: ${limit}`);
 
         let response = await data.map(async community => {
-            return await fetch(`https://www.reddit.com/r/${community}/.json`);
+            return await fetch(`https://www.reddit.com/r/${community}/.json?limit=${limit}`);
         });
 
         response = await Promise.all(response);
@@ -19,6 +22,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
             if (community.data) {
                 console.log(community.data);
                 community.data.children.forEach(post => {
+                    console.log(post);
                     const images = [];
                     let video = '';
         
@@ -27,9 +31,11 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
         
                     } else if(post.data['is_gallery'] || post.data['media_metadata'] !== undefined){
                         Object.keys(post.data['media_metadata']).forEach(img => {
-                            images.push({
-                                source: fixImgUrl(post.data['media_metadata'][img].s.u),
-                            })
+                            if (post.data['media_metadata'][img].e !== 'RedditVideo') {
+                                images.push({
+                                    source: fixImgUrl(post.data['media_metadata'][img].s.u),
+                                })
+                            }
                         });
         
                     } else if(post.data['is_reddit_media_domain']) {

@@ -46,7 +46,7 @@ export const communitiesSlice = createSlice({
         activeCommunities: []
     },
     reducers: {
-        addCommunitiy: (state, action) => {
+        addCommunity: (state, action) => {
             const { id, name, icon, description } = action.payload;
             state.communities[id] = {
                 id: id,
@@ -68,7 +68,7 @@ export const communitiesSlice = createSlice({
 })
 
 export const {
-    addCommunitiy,
+    addCommunity,
     removeCommunity } = communitiesSlice.actions;
 export const selectCommunities = state => state.communities.communities;
 export default communitiesSlice.reducer;

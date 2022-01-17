@@ -1,7 +1,7 @@
 import './Search.css';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCommunities, addCommunitiy, removeCommunity } from '../communities/CommunitiesSlice';
+import { selectCommunities, addCommunity, removeCommunity } from '../communities/CommunitiesSlice';
 import { removeCommunityFromAllTags } from '../tags/TagsSlice';
 
 export default function SearchItem({result}) {
@@ -24,7 +24,7 @@ export default function SearchItem({result}) {
             dispatch(removeCommunityFromAllTags(result.id));
             setFollowing(false);
         } else {
-            dispatch(addCommunitiy(result));
+            dispatch(addCommunity(result));
             setFollowing(true);
         }
     }

@@ -39,3 +39,10 @@
     flex-wrap: wrap;
     flex-grow: 1;
 }
+
+.needTag {
+    margin: 0;
+    color: hsl(0, 100%, 65%);
+    font-style: italic;
+    font-size: 1.2rem;
+}
