@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectTags } from '../tags/TagsSlice';
 import NewTagInput from './NewTagInput';
 import { removeCommunity } from './CommunitiesSlice';
+import { removeCommunityFromAllTags } from '../tags/TagsSlice';
 
 export default function CommunityListItem({community}) {
     const tags = useSelector(selectTags);
@@ -13,6 +14,7 @@ export default function CommunityListItem({community}) {
 
     const handleClick = () => {
         dispatch(removeCommunity(community));
+        dispatch(removeCommunityFromAllTags(community));
     }
 
     return (

@@ -1,11 +1,18 @@
 import './Communities.css';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCommunities } from './CommunitiesSlice';
 import CommunityListItem from './CommunityListItem';
+import { setIdle } from '../posts/PostsSlice';
 
 export default function Communities() {
     const communities = useSelector(selectCommunities);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setIdle());
+    }, [communities]);
+
 
     return (
         <section>

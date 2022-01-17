@@ -1,6 +1,6 @@
 .communities {
     margin: 1rem auto;
-    background-color: hsl(184, 40%, 15%);
+    background-color: hsl(184, 50%, 20%);
     max-width: 700px;
     display: flex;
     flex-direction: column;
@@ -39,4 +39,3 @@
     flex-wrap: wrap;
     flex-grow: 1;
 }
-

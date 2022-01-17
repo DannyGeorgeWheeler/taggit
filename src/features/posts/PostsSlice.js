@@ -17,6 +17,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (data, {rej
 
         json.forEach(community => {
             if (community.data) {
+                console.log(community.data);
                 community.data.children.forEach(post => {
                     const images = [];
                     let video = '';
@@ -101,36 +102,45 @@ export const postsSlice = createSlice({
     initialState: {
         posts: {},
         status: 'idle',
+        comments: 'idle'
     },
     reducers: {
         addPost: (state, action) => {
             const { id } = action.payload;
             state.posts[id] = action.payload;
+        },
+        setIdle: (state) => {
+            state.status = 'idle';
         }
     },
     extraReducers: {
         [fetchPosts.pending]: (state) => {
             state.status = 'loading';
+            state.posts = {};
         },
         [fetchPosts.fulfilled]: (state, action) => {
-            state.status = 'succeeded';
-            const newPosts = action.payload;
-            Object.keys(newPosts).map(id => {
-                return state.posts[id] = newPosts[id];
-            });
+            state.status = 'loaded';
+            // const newPosts = action.payload;
+            // Object.keys(newPosts).map(id => {
+            //     return state.posts[id] = newPosts[id];
+            // });
+
+            state.posts = action.payload;
         },
         [fetchPosts.rejected]: (state, action) => {
+            state.status = 'rejected';
             console.log(`rejected`, action.payload);
         },
         [fetchComments.pending]: (state) => {
-            state.status = 'loading';
+            state.comments = 'loading';
         },
         [fetchComments.fulfilled]: (state, action) => {
-            state.status = 'succeeded';
+            state.comments = 'loaded';
             const { postId, messages } = action.payload;
             state.posts[postId].comments = messages;
         },
         [fetchComments.rejected]: (state, action) => {
+            state.comments = 'rejected';
             console.log(`rejected`, action.payload);
         }
 
@@ -138,6 +148,7 @@ export const postsSlice = createSlice({
 })
 
 
-export const { addPost } = postsSlice.actions;
+export const { addPost, setIdle } = postsSlice.actions;
 export const selectPosts = state => state.posts.posts;
+export const selectStatus = state => state.posts.status;
 export default postsSlice.reducer;

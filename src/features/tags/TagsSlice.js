@@ -15,8 +15,8 @@ const initialTags = {
         active: true
     },
 
-    id3: {
-        id: 'id3',
+    dev: {
+        id: 'dev',
         name: 'dev',
         communityIds: ['webdev', 'ProgrammerHumor'],
         active: false
@@ -55,6 +55,15 @@ export const tagsSlice = createSlice({
             state.tags[tagId].communityIds.splice(index, 1);
         },
 
+        removeCommunityFromAllTags: (state, action) => {
+            console.log(action.payload);
+            const communityId = action.payload.id;
+            Object.keys(state.tags).forEach(tag => {
+                const index = state.tags[tag].communityIds.indexOf(communityId);
+                index > -1 && state.tags[tag].communityIds.splice(index, 1);
+            });
+        },
+
         toggleActive: (state, action) => {
             const tagId = action.payload;
             state.tags[tagId].active = !state.tags[tagId].active;
@@ -68,7 +77,8 @@ export const {
     deleteTag, 
     addTagId, 
     addCommunityTag, 
-    removeCommunityTag, 
+    removeCommunityTag,
+    removeCommunityFromAllTags, 
     toggleActive, } = tagsSlice.actions;
 export const selectTags = state => state.tags.tags;
 export const selectActiveTags = state => Object.values(state.tags.tags).filter(tag => tag.active === true);

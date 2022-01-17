@@ -7,11 +7,21 @@ export const searchReddit = createAsyncThunk('search/searchReddit', async (term,
         const response = await fetch(`https://www.reddit.com/search/.json?q=${term}&source=recent&type=sr`);
         const json = await response.json();
         json.data.children.forEach(result => {
+            let icon;
+
+            if (result.data['community_icon'] !== '') {
+                icon = fixUrl(result.data['community_icon'])
+            } else if (result.data['icon_img'] !== '') {
+                icon = fixUrl(result.data['icon_img'])
+            } else {
+                icon = defaultIcon;
+            }
+
             results.push({
                 id: result.data['display_name'],
                 name: result.data['title'],
                 description: result.data['public_description'],
-                icon: result.data['community_icon'] !== '' ? fixUrl(result.data['community_icon']) : defaultIcon,
+                icon: icon,
             })
         });
         return results;

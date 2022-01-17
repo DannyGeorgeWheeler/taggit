@@ -16,9 +16,7 @@ export default function SearchBar() {
         if (term.length > 2) {
             navigate('/search', {replace: true});
             dispatch(searchReddit(term));
-        } else {
-            navigate('/', {replace: true});
-        }
+        } 
     }
 
     return (

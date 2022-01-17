@@ -1,16 +1,17 @@
 import './Posts.css';
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts, selectPosts } from "./PostsSlice.js";
+import { fetchPosts, selectPosts, selectStatus } from "./PostsSlice.js";
 import { Link } from 'react-router-dom';
 import { selectActiveTags, selectTags } from "../tags/TagsSlice";
 import Tag from '../tags/Tag';
 import { selectCommunities } from '../communities/CommunitiesSlice';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-import { faComment, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faArrowAltCircleUp, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Posts() {
+    const status = useSelector(selectStatus);
     const posts = useSelector(selectPosts);
     const tags = useSelector(selectTags);
     const currentTags = useSelector(selectActiveTags);
@@ -24,8 +25,9 @@ export default function Posts() {
                 !activeCommunities.includes(community) && activeCommunities.push(community);
             });
         });
+        console.log('fetching posts');
         dispatch(fetchPosts(activeCommunities));
-    }, [communities]);
+    }, []);
 
 
     const getTitleTags = () => {
@@ -54,6 +56,17 @@ export default function Posts() {
                 return 1;
             }
         });
+    }
+
+    if (status !== 'loaded') {
+        return (
+            <section className='loading'>
+                <FontAwesomeIcon className='spinner' icon={faSpinner} spin/>
+                <p>loading...</p>
+            </section>
+        );
+    } else {
+        console.log(status);
     }
     
     return (

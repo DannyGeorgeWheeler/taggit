@@ -19,6 +19,19 @@ h3 {
 
 /* The Post Summary Page */
 
+.loading {
+    max-width: 700px;
+    margin: 2.5rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.spinner {
+    font-size: 2rem;
+}
+
 .activeTagsHeader {
     display: flex;
     flex-wrap: wrap;
@@ -63,6 +76,7 @@ h3 {
 
 .summaryGallery {
     position: relative;
+    margin: 0 auto;
 }
 
 .galleryText {

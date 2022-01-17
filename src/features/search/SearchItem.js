@@ -2,6 +2,7 @@ import './Search.css';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCommunities, addCommunitiy, removeCommunity } from '../communities/CommunitiesSlice';
+import { removeCommunityFromAllTags } from '../tags/TagsSlice';
 
 export default function SearchItem({result}) {
     const communities = useSelector(selectCommunities);
@@ -13,13 +14,14 @@ export default function SearchItem({result}) {
         following ? setButtonText('Unfollow') : setButtonText('Follow');
     }, [following]);
 
-    const handleClick = (event) => {
+    const handleClick = () => {
         toggleFollowing();
     }
 
     const toggleFollowing = () => {
         if (following) {
             dispatch(removeCommunity(result.id));
+            dispatch(removeCommunityFromAllTags(result.id));
             setFollowing(false);
         } else {
             dispatch(addCommunitiy(result));

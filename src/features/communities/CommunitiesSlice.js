@@ -43,12 +43,11 @@ export const communitiesSlice = createSlice({
     name: 'communities',
     initialState: {
         communities: initialCommunities,
+        activeCommunities: []
     },
     reducers: {
         addCommunitiy: (state, action) => {
-            console.log(action.payload);
             const { id, name, icon, description } = action.payload;
-            console.log(id, name);
             state.communities[id] = {
                 id: id,
                 name: name,
@@ -60,6 +59,10 @@ export const communitiesSlice = createSlice({
         removeCommunity: (state, action) => {
             const { id } = action.payload;
             delete state.communities[id];
+        },
+
+        setActiveCommunities: (state, action) => {
+
         }
     }
 })
